@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivos y Documentos - SRRI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#050506',
+                        cardgray: '#0f0f12',
+                        crimsonred: '#e11d48',
+                        slateborder: '#1f1f23',
+                        paperbg: '#18181b', // Fondo estilo papel oscuro para el manifiesto
+                    },
+                    fontFamily: {
+                        mono: ['Courier New', 'Courier', 'monospace'],
+                        serif: ['Georgia', 'Cambria', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050506;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e11d48;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f43f5e;
+        }
+
+        /* Estilo especial para la impresión del manifiesto */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-document, #printable-document * {
+                visibility: visible;
+            }
+            #printable-document {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                color: #000 !important;
+                background: #fff !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-midnight text-gray-100 font-sans antialiased selection:bg-rose-600 selection:text-white">
+
+    <!-- Barra de Navegación -->
+    <nav class="sticky top-0 z-50 bg-midnight/90 backdrop-blur-md border-b border-slateborder px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="flex items-center gap-2">
+                    <img src="logo.png" alt="SRRI Logo" class="h-8 w-auto block object-contain" onerror="this.style.display='none'; document.getElementById('text-logo').style.display='inline';">
+                    <span id="text-logo" class="text-crimsonred font-mono text-xl font-black tracking-tighter">¬ SRRI</span>
+                </div>
+                <span class="hidden md:inline text-xs font-mono tracking-widest text-gray-400">| ARCHIVOS OFICIALES</span>
+            </a>
+            <div class="flex items-center gap-6 text-sm font-mono">
+                <!-- Enlace de regreso al Inicio -->
+                <a href="index.html" class="text-gray-300 hover:text-crimsonred transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-left text-xs"></i> Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header de la Biblioteca -->
+    <header class="py-16 px-6 border-b border-slateborder bg-gradient-to-b from-midnight to-cardgray/40">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase">
+                Biblioteca de la Resistencia
+            </h1>
+            <p class="text-gray-400 text-sm font-mono max-w-xl mx-auto">
+                REPOSITORIO DE MANIFIESTOS, DISECCIONES LÓGICAS Y TEXTOS METODOLÓGICOS DE LA SRRI
+            </p>
+        </div>
+    </header>
+
+    <!-- Contenido Principal: Archivador e Historial -->
+    <main class="max-w-6xl mx-auto px-6 py-12 grid lg:grid-cols-4 gap-8">
+        
+        <!-- Barra Lateral de Control (Filtros y navegación interna) -->
+        <aside class="space-y-6 lg:col-span-1 no-print">
+            <div class="bg-cardgray border border-slateborder p-6 rounded-xl space-y-4">
+                <h3 class="text-white font-mono text-xs font-bold uppercase tracking-wider text-crimsonred">// CATEGORÍAS</h3>
+                <nav class="flex flex-col gap-2 text-xs font-mono text-gray-400">
+                    <button class="text-left px-3 py-2 bg-rose-950/20 border border-rose-900/40 text-white rounded font-bold flex items-center justify-between">
+                        <span>Manifiestos (1)</span>
+                        <i class="fa-solid fa-caret-right text-crimsonred"></i>
+                    </button>
+                    <button class="text-left px-3 py-2 hover:bg-cardgray hover:text-white rounded transition-all flex items-center justify-between opacity-50 cursor-not-allowed" disabled>
+                        <span>Auditorías Lógicas (0)</span>
+                        <i class="fa-solid fa-lock text-[10px]"></i>
+                    </button>
+                    <button class="text-left px-3 py-2 hover:bg-cardgray hover:text-white rounded transition-all flex items-center justify-between opacity-50 cursor-not-allowed" disabled>
+                        <span>Fanzines (0)</span>
+                        <i class="fa-solid fa-lock text-[10px]"></i>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Caja de Utilidades -->
+            <div class="bg-cardgray border border-slateborder p-6 rounded-xl space-y-3 font-mono text-xs text-gray-400">
+                <h3 class="text-white text-xs font-bold uppercase tracking-wider text-crimsonred">// ACCIONES</h3>
+                <button onclick="window.print()" class="w-full py-2 border border-slateborder hover:border-crimsonred rounded hover:text-white transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-print"></i> Imprimir Manifiesto
+                </button>
+                <a href="index.html#registro" class="w-full py-2 bg-crimsonred text-white rounded hover:bg-rose-700 transition-all flex items-center justify-center gap-2 font-bold uppercase tracking-wider text-[10px]">
+                    <i class="fa-solid fa-user-plus"></i> Ir a Alistamiento
+                </a>
+            </div>
+        </aside>
+
+        <!-- Lector de Documentos (El Manifiesto de la SRRI) -->
+        <section class="lg:col-span-3 space-y-8">
+            
+            <!-- Encabezado de Documento Seleccionado -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slateborder pb-6 no-print">
+                <div>
+                    <span class="text-xs font-mono text-crimsonred tracking-wider uppercase font-bold">// ARCHIVO CLASIFICADO: SRRI-DOC-001</span>
+                    <h2 class="text-white text-2xl font-bold uppercase tracking-tight mt-1 font-mono">Declaración de Insurgencia</h2>
+                </div>
+                <div class="flex gap-2 text-xs font-mono">
+                    <span class="bg-[#1f1f23] px-3 py-1 rounded text-gray-400 border border-slateborder">Emitido: 18 de Mayo</span>
+                    <span class="bg-emerald-950/40 text-emerald-400 border border-emerald-900/60 px-3 py-1 rounded">Estatus: Activo</span>
+                </div>
+            </div>
+
+            <!-- Contenedor del Manuscrito Imprimible -->
+            <article id="printable-document" class="bg-paperbg border border-slateborder p-8 sm:p-12 rounded-2xl shadow-xl leading-relaxed">
+                <!-- Logotipo de la Impresión (Solo visible al imprimir) -->
+                <div class="hidden print:block border-b-2 border-black pb-4 mb-8">
+                    <h1 class="text-xl font-black tracking-widest font-mono">SOCIEDAD RUSSELLIANA DE RESISTENCIA INTELECTUAL (SRRI)</h1>
+                    <span class="text-xs font-mono">BIBLIOTECA OFICIAL • EMISIÓN DEL 18 DE MAYO</span>
+                </div>
+
+                <div class="font-serif text-gray-200 space-y-6 text-base sm:text-lg max-w-3xl mx-auto">
+                    
+                    <!-- Título Interno -->
+                    <div class="text-center pb-8 border-b border-slateborder">
+                        <h1 class="text-3xl sm:text-4xl font-black text-white font-mono uppercase tracking-tight leading-tight">
+                            Declaración de Insurgencia
+                        </h1>
+                        <p class="text-xs font-mono text-crimsonred mt-3 uppercase tracking-widest font-bold">
+                            El pensamiento es un acto de rebelión contra el dogma, la barbarie de la guerra y la opresión de la estupidez organizada
+                        </p>
+                    </div>
+
+                    <!-- Epígrafe Histórico -->
+                    <div class="border-l-4 border-crimsonred pl-6 py-2 my-8 italic text-gray-300 bg-midnight/30 pr-4 rounded-r">
+                        "Frente a nosotros, si lo elegimos, yace un progreso continuo en felicidad, conocimiento y sabiduría. ¿Elegiremos la muerte en su lugar, porque no podemos olvidar nuestras disputas? Apelamos, como seres humanos, a los seres humanos: recuerden su humanidad y olviden el resto."
+                        <span class="block mt-2 text-xs font-mono text-crimsonred font-bold not-italic">— Manifiesto Russell-Einstein (Londres, 1955)</span>
+                    </div>
+
+                    <p>
+                        Somos un frente de combate contra el avance del fanatismo, el dogmatismo y los sinsentidos. <strong>Retomamos la antorcha de Bertrand Russell en la defensa implacable de la razón, el escepticismo metodológico, la laicidad y el libre pensamiento.</strong>
+                    </p>
+
+                    <p>
+                        La historia nos enseña que las sociedades no sucumben por simple ignorancia, sino por la aplicación deliberada de la técnica al servicio del fanatismo. En nuestra época, el dogmatismo es el enemigo de la paz, la barrera definitiva contra el nacimiento de nuevas formas de organización social y el mayor obstáculo para la felicidad humana. Frente a quienes exigen la "voluntad de creer" en mitos reconfortantes, nosotros oponemos la <strong class="text-crimsonred font-mono">"voluntad de dudar"</strong>. Entendemos que es profundamente odioso y perjudicial creer en una proposición cuando no existe motivo alguno para suponerla verdadera. <strong>Esta simple premisa de escepticismo, de volverse universal, revolucionaría por completo nuestro sistema social y político.</strong>
+                    </p>
+
+                    <p>
+                        Nos asedia una pseudo élite de tecnócratas que esgrimen credenciales para establecer dogmas, y cárteles políticos que utilizan el lenguaje como una herramienta para ocultar la masacre y la guerra. Los gobiernos y las cúpulas de poder prefieren <strong>impartir información sin cultivar la inteligencia</strong>, pues saben que las personas que piensan por sí mismas son indomables y socavan su autoridad. Han descubierto que, para perpetuar su dominio, deben mantenernos en la estupidez. Por lo tanto, en oposición a esta estupidez organizada, la SRRI respalda la veracidad científica no cooptada por intereses, como una de las pocas fuerzas verdaderamente unificadoras: basamos nuestras convicciones en la observación y la inferencia desapasionada para disolver el odio nacido de las metafísicas empleadas por las facciones fanáticas.
+                    </p>
+
+                    <p>
+                        Denunciamos, asimismo, la alarmante deriva de la política contemporánea hacia la farsa de lo que ahora se llama con el nombre de “post-verdad” y la demagogia histriónica, cuyo síntoma actual más grotesco es la retórica al estilo de Javier Milei. Esta corriente no busca gobernar la realidad, sino sustituirla por una alucinación retórica que <strong>clausura de forma violenta todo diálogo racional</strong>. Es una política del delirio que desprecia los datos empíricos, niega las ciencias sociales y se atrinchera en un analfabetismo histórico que exige militancia y fé ciega; una burda puesta en escena capaz de, con ausencia de rigor tildar a Marx de "satanista" o de adjudicar a un pensador radicalmente iconoclasta y anticlerical como Nietzsche las consignas reaccionarias de "Dios, patria y familia" y querer sustentar todo bajo un supuesto “doctorado”. Frente a esta desconexión patológica de la realidad, donde el grito y la caricatura pretenden reemplazar la confrontación lógica de las ideas, proponemos el rigor del empirismo, la honestidad intelectual y el análisis gramatical.
+                    </p>
+
+                    <p>
+                        Sabemos que la claridad sintáctica es el arma por excelencia para desarmar discursos de tramposos y mentirosos, pues desenmascara sus juegos del lenguaje demagogos que buscan embrujar el entendimiento y obligarnos a mantenernos en el terreno de las falacias, es por ello que proponemos la aplicación rigurosa de la terapia lingüística que nos devuelva los conceptos de su uso metafísico a su aplicación cotidiana, real y comunitariamente verificable, deshaciéndose así de la ilusión de sus sofismas y dejando al descubierto el vacío absoluto de sus consignas.
+                    </p>
+
+                    <p class="font-mono text-sm text-crimsonred font-bold uppercase tracking-widest pt-6 border-t border-slateborder">
+                        // NUESTROS TRES PILARES DE ACCIÓN
+                    </p>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-mono text-white text-base font-bold uppercase mb-2">1. El Frente Secular: Contra la Instrumentalización de la Fe</h3>
+                            <p class="text-sm text-gray-300">
+                                No somos una organización antirreligiosa; reconocemos la libertad de conciencia individual. Sin embargo, combatimos activamente el dogmatismo religioso geopolítico. Enfrentamos la colonización espiritual del neopentecostalismo, el uso del sionismo religioso para legitimar el despojo, y el clericalismo tradicional reaccionario. Exigimos la separación radical e infranqueable de la religión frente a la educación y el Estado.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-mono text-white text-base font-bold uppercase mb-2">2. Reconstrucción Material y Visión de Futuro</h3>
+                            <p class="text-sm text-gray-300">
+                                Abogamos por la supremacía de los impulsos creadores frente a los posesivos (avaricia). Rechazamos la explotación del capitalismo oligárquico corporativo y con idéntico rigor los totalitarismos burocráticos estatistas que ahogan el libre pensamiento. Luchamos por la democracia económica de las cooperativas y el derecho inalienable a un ingreso mínimo garantizado ("salario del vagabundo").
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-mono text-white text-base font-bold uppercase mb-2">3. Ecología Empírica y la Democratización del Saber</h3>
+                            <p class="text-sm text-gray-300">
+                                Exigimos una educación pública, laica, científica y filosófica. Promovemos una interculturalidad de los pueblos sin chovinismos. Respaldamos una defensa medioambiental estrictamente basada en la evidencia científica, combinándola con el derecho a gozar del progreso tecnológico, rechazando firmemente cualquier condena moral al primitivismo tecnológico.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="font-mono text-sm text-crimsonred font-bold uppercase tracking-widest pt-6 border-t border-slateborder">
+                        // EL DECÁLOGO LIBERAL DE BERTRAND RUSSELL
+                    </p>
+
+                    <ol class="list-decimal pl-6 text-sm text-gray-300 space-y-3 font-mono">
+                        <li>No te sientas absolutamente seguro de nada.</li>
+                        <li>No creas que vale la pena proceder ocultando pruebas, pues la evidencia siempre termina por salir a la luz.</li>
+                        <li>Nunca intentes desalentar el pensamiento, porque seguramente lo lograrás.</li>
+                        <li>Cuando encuentres oposición, trata de superarla mediante el argumento y no mediante la autoridad.</li>
+                        <li>No sientas respeto por la autoridad de otros, pues siempre se pueden encontrar autoridades contrarias.</li>
+                        <li>No utilices el poder para suprimir opiniones que consideres perniciosas, porque si lo haces, las opiniones te suprimirán a ti.</li>
+                        <li>No temas ser excéntrico en tus opiniones, pues todas las opiniones que hoy son aceptadas alguna vez fueron excéntricas.</li>
+                        <li>Encuentra más placer en el disenso inteligente que en la aceptación pasiva.</li>
+                        <li>Sé escrupulosamente veraz, incluso si la verdad resulta inconveniente.</li>
+                        <li>No sientas envidia por la felicidad de quienes viven en un paraíso de tontos, pues solo un tonto pensaría que eso es la felicidad.</li>
+                    </ol>
+
+                    <div class="border-t border-slateborder pt-6">
+                        <p class="text-xs text-gray-400 uppercase font-mono text-center">
+                            Comité fundador de la Sociedad Russelliana de Resistencia Intelectual (SRRI)
+                        </p>
+                        <p class="text-[10px] text-crimsonred font-mono text-center uppercase tracking-widest mt-2">
+                            ¡Frente a la estupidez organizada, la evidencia científica, el rigor y el escepticismo radical de los pueblos!
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Botón inferior para regresar al index de forma clara -->
+            <div class="flex justify-center pt-6 no-print">
+                <a href="index.html" class="inline-flex items-center gap-2 text-xs font-mono text-gray-400 hover:text-white transition-all bg-cardgray border border-slateborder px-6 py-3 rounded-lg hover:border-crimsonred">
+                    <i class="fa-solid fa-house text-crimsonred"></i> Volver a la Página Principal
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slateborder py-12 px-6 text-center text-xs font-mono text-gray-500 no-print">
+        <p>© 2026 Sociedad Russelliana de Resistencia Intelectual (SRRI). Todos los derechos de libre copia reservados.</p>
+    </footer>
+
+</body>
+</html>
